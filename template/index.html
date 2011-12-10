@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>Introducción a Flask</title>
+
+    <meta charset='utf-8'>
+    <script
+      src='../slides.js'></script>
+  </head>
+
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+
+
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+
+      <!--<article class='biglogo'>
+      </article>-->
+      <!-- #1 -->
+      <article>
+        <h1>
+           Introducción a Flask <img src="../images/flask.png" />
+        </h1>
+        <p>
+          <a href="http://javaguirre.net">Javier Aguirre</a>
+          <br>
+          7 de Nov de 2011
+          <br>
+          <a href="http://gigas.com">Gigas.com</a>
+        </p>
+        <div class="source">
+            <a href="http://www.gul.uc3m.es/">Jornadas del GUL</a> - Noviembre 2011
+        </div>
+      </article>
+
+      <!-- #2 -->
+      <article>
+        <h3>Índice</h3>
+        <ul class="build">
+            <li><a href ="#3">Offline/Storage</a> <img src="images/HTML5_Offline_Storage.png" /> </li>
+            <li><a href="#">Tiempo Real/Comunicación</a> <img src="images/HTML5_Connectivity.png" /></li>
+            <li><a href="#">Archivos y Acceso Hardware </a> <img src="images/HTML5_Device_Access.png" /></li>
+            <li><a href="#">Gráficos & Multimedia</a> <img src="images/HTML5_Semantics.png" /></li>
+            <li><a href="#">Mejoras</a> <img src="images/HTML5_3D_Effects.png" /></li>
+        </ul>
+        <div class='source'>
+          Fuente: <a href="http://slides.html5rocks.com/#table-of-contents">html5rocks.com</a>
+        </div>
+      </article>
+
+      <!-- #3 -->
+      <article>
+        <h3>
+          Web Storage
+        </h3>
+        <ul>
+          <li><strong>Local Storage:</strong> Leer y escribir información en el cliente</li>
+          <li><strong>Session Storage: </strong> Alternativa a las cookies</li>
+        </ul>
+      </article>
+
+      <!-- #4 -->
+      <article>
+        <h3>
+          Comprobar si tenemos funcionalidad
+        </h3>
+        <pre>
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window
+        && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+        </pre>
+        <div class="source">
+            Fuente: <a href="http://diveintohtml5.info/storage.html">Dive Into HTML5</a>
+        </div>
+      </article>
+
+      <article>
+        <h3>
+          Referencias
+        </h3>
+        <ul>
+            <li><a href="">Flask web</a></li>
+            <li><a href="">FLask Github</a></li>
+            <li><a href="">Werkzeug</a></li>
+        </ul>
+        <br />
+        <p>Presentación en... <a href="https://github.com/javaguirre/guluc3m-api-js">github</a></p>
+      </article>
+
+      <article>
+        <h3>
+          ¿Preguntas?
+        </h3>
+
+        <ul>
+          <li><a href="http://javaguirre.net">Blog</a></li>
+          <li>contacto EN javaguirre PUNTO net</li>
+          <li>
+            <a href='http://twitter.com/javaguirre'>@javaguirre</a>
+          </li>
+          <li>
+            <a href='http://www.github.com/javaguirre'>Github</a>
+          </li>
+          <li>
+            <a href='http://es.linkedin.com/in/javaguirre'>LinkedIn</a>
+          </li>
+
+        </ul>
+      </article>
+
+    </section>
+
+  </body>
+</html>
