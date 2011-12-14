@@ -44,73 +44,186 @@
         </h1>
         <p>
           <a href="http://javaguirre.net">Javier Aguirre</a>
-          <br>
-          7 de Nov de 2011
-          <br>
+          <br/>
+          13 de Dic de 2011
+          <br/>
           <a href="http://gigas.com">Gigas.com</a>
         </p>
         <div class="source">
-            <a href="http://www.gul.uc3m.es/">Jornadas del GUL</a> - Noviembre 2011
+            <a href="http://python-madrid.es/">Python Madrid</a> - Diciembre 2011
         </div>
       </article>
 
       <!-- #2 -->
       <article>
-        <h3>Índice</h3>
-        <ul class="build">
-            <li><a href ="#3">Offline/Storage</a> <img src="images/HTML5_Offline_Storage.png" /> </li>
-            <li><a href="#">Tiempo Real/Comunicación</a> <img src="images/HTML5_Connectivity.png" /></li>
-            <li><a href="#">Archivos y Acceso Hardware </a> <img src="images/HTML5_Device_Access.png" /></li>
-            <li><a href="#">Gráficos & Multimedia</a> <img src="images/HTML5_Semantics.png" /></li>
-            <li><a href="#">Mejoras</a> <img src="images/HTML5_3D_Effects.png" /></li>
+        <h3>Introducción</h3>
+        <ul>
+            <li>Conjunto de herramientas</li>
+            <li>Núcleo sencillo</li>
+            <li>Muy configurable y extensible</li>
+            <li>Licencia BSD</li>
         </ul>
-        <div class='source'>
-          Fuente: <a href="http://slides.html5rocks.com/#table-of-contents">html5rocks.com</a>
-        </div>
       </article>
 
       <!-- #3 -->
       <article>
-        <h3>
-          Web Storage
-        </h3>
+        <h3>Componentes</h3>
         <ul>
-          <li><strong>Local Storage:</strong> Leer y escribir información en el cliente</li>
-          <li><strong>Session Storage: </strong> Alternativa a las cookies</li>
+            <li>Jinja2</li>
+            <li>Werkzeug</li>
+            <li>Cookies seguras</li>
+            <li>Tests unitarios</li>
+            <li>Depuración</li>
         </ul>
       </article>
 
       <!-- #4 -->
       <article>
         <h3>
-          Comprobar si tenemos funcionalidad
+            Inicio
         </h3>
         <pre>
-function supports_html5_storage() {
-  try {
-    return 'localStorage' in window
-        && window['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-}
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Index"
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
         </pre>
         <div class="source">
-            Fuente: <a href="http://diveintohtml5.info/storage.html">Dive Into HTML5</a>
+            Fuente: <a href="http://flask.pocoo.org/">Flask web</a>
         </div>
       </article>
 
       <article>
         <h3>
+            Modelo/BD
+        </h3>
+        <pre>
+import sqlite3
+
+# configuración
+DATABASE = '/tmp/flask.db'
+DEBUG = True
+SECRET_KEY = 'development key'
+USERNAME = 'admin'
+PASSWORD = 'default'
+        </pre>
+        <pre>
+#En la app...
+from flask import Flask, request, session, g, redirect, url_for, \
+     abort, render_template, flash
+import myconfig
+
+app = Flask(__name__)
+app.config.from_object(myconfig)
+#o ...
+app.config.from_envvar('FLASK_SETTINGS', silent=True)
+        </pre>
+      </article>
+      <article>
+        <h3>
+            Vista - Jinja2
+        </h3>
+        <pre>
+{% extends "base.html" %}
+{% block content %}
+    {% if query %}
+        <p>Resultados para {{ query }}</p>
+    {% endif %}
+    {% for link in links %}
+        {{ link.title }} - {{ link.description }}
+            <a href="{{ link.guid }}">[PDF]</a>
+    {% endfor %}
+
+{% endblock %}
+        </pre>
+      </article>
+      <article>
+        <h3>
+            Controlador
+        </h3>
+        <pre>
+@app.route('/')
+def index():
+    return 'Index Page'
+
+@app.route('/user/&#60;username&#62;')
+def show_user_profile(username):
+    pass
+
+@app.route('/post/&#60;int:post_id&#62;', methods = ['POST'])
+def edit_post(post_id):
+    pass
+      </pre>
+      <pre>
+url_for('index')
+url_for('login', username = 'Python Madrid')
+      </pre>
+      </article>
+      <article>
+      <h3>Variables POST</h3>
+      <pre>
+@app.route('/post/<int:post_id>', methods = ['POST'])
+def edit_post(post_id):
+   if request.method == 'POST':
+       #Validar
+       print request.form['myname']
+      </pre>
+      <h3>Cookies</h3>
+      <pre>
+@app.route('/')
+def index():
+    username = request.cookies.get('username')
+      </pre>
+      </article>
+      <article>
+        <h3>Redirecciones y errores</h3>
+        <pre>
+from flask import abort, redirect, url_for
+
+@app.route('/')
+def index():
+    return redirect(url_for('login'))
+
+@app.route('/login')
+def login():
+    abort(401)
+    this_is_never_executed()
+
+#Registrar página 404
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+        </pre>
+      </article>
+      <article>
+        <h3>Extensiones</h3>
+        <ul>
+            <li>blueprints conjunto de funcionalidades</li>
+            <li>factorías de aplicación</li>
+            <li><a href="http://flask.pocoo.org/extensions/">Ejemplos</a></li>
+        </ul>
+        <div class="source">
+            <a href="http://flask.pocoo.org/docs/extensiondev/">Documentación</a>
+        </div>
+      </article>
+      <article>
+        <h3>
           Referencias
         </h3>
         <ul>
-            <li><a href="">Flask web</a></li>
-            <li><a href="">FLask Github</a></li>
-            <li><a href="">Werkzeug</a></li>
+            <li><a href="http://flask.pocoo.org/">Flask web</a></li>
+            <li><a href="https://github.com/mitsuhiko/flask">Flask Github</a></li>
+            <li><a href="http://werkzeug.pocoo.org/">Werkzeug</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja 2</a></li>
         </ul>
         <br />
-        <p>Presentación en... <a href="https://github.com/javaguirre/guluc3m-api-js">github</a></p>
+        <p>Presentación en... <a href="https://github.com/javaguirre/presentations/flask">github</a></p>
       </article>
 
       <article>
